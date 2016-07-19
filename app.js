@@ -6,6 +6,5 @@ const canvasEl = document.getElementById("game-canvas");
 // canvasEl.height = window.innerHeight;
 // canvasEl.width = window.innerWidth;
 canvasCtx = canvasEl.getContext("2d");
-debugger
 gv = new GameView(canvasCtx);
 gv.start();
