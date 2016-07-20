@@ -84,7 +84,12 @@
 
 	    if (otherObject instanceof Bullet) {
 	      this.game.remove(otherObject);
-	      this.game.remove(this);
+
+	      if (this.radius === Asteroid.RADIUS) {
+	        this.game.blowUpAsteroid(this);
+	      } else {
+	        this.game.remove(this);
+	      }
 	    }
 
 	  // }
@@ -214,13 +219,20 @@
 	};
 
 	Ship.prototype.fireBullet = function () {
-	  debugger
+
 	  let bulletizeVel = function (oldVel) {
+
+	    if (oldVel[0] === 0 && oldVel[1] === 0) { return Util.randomVec(2 * Math.sqrt(2)); }
 	    let bulletVel = [];
+	    let cTemp = Math.sqrt(Math.pow(oldVel[0],2) + Math.pow(oldVel[1],2));
+	    let mod = ((cTemp + 2) / cTemp);
+
 	    oldVel.forEach (function(el) {
-	      let speedy = el + el;
+	      let speedy = el * mod;
 	      bulletVel.push(speedy);
+
 	    });
+
 	    return bulletVel;
 	  };
 
@@ -291,7 +303,7 @@
 	};
 	Game.DIM_X = 1000;
 	Game.DIM_Y = 800;
-	Game.NUM_ASTEROIDS = 20;
+	Game.NUM_ASTEROIDS = 10;
 
 	Game.prototype.addAsteroids = function() {
 	  for (var i = 0; i < Game.NUM_ASTEROIDS; i++) {
@@ -301,6 +313,17 @@
 	    this.asteroids.push(newAst);
 	  }
 
+	};
+
+	Game.prototype.blowUpAsteroid = function (oldAst) {
+	  // debugger
+	  for (var i = 0; i < 3; i++) {
+	    let pos = [oldAst.pos[0], oldAst.pos[1]];
+	    let newAst = new Asteroid(pos, this);
+	    newAst.radius = 13;
+	    this.asteroids.push(newAst);
+	  }
+	  this.remove(oldAst);
 	};
 
 	Game.prototype.randomPosition = function() {
