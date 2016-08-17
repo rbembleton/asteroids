@@ -10,7 +10,7 @@
 
 ## Preview
 
-![demo](docs/asteroids_demo.gif)
- 
+![demo](docs/asteroids_demo_shoot.gif)
+
 Screenshot:
 ![screenshot](docs/screenshot.png)
