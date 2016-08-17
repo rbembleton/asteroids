@@ -11,6 +11,6 @@
 ## Preview
 
 ![demo](docs/asteroids_demo.gif)
-
+ 
 Screenshot:
 ![screenshot](docs/screenshot.png)
