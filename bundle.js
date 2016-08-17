@@ -76,7 +76,6 @@
 
 
 	Asteroid.prototype.collideWith = function (otherObject) {
-	  // if (this instanceof Asteroid) {
 
 	    if (otherObject instanceof Ship) {
 	      otherObject.relocate();
@@ -92,17 +91,10 @@
 	      }
 	    }
 
-	  // }
 	};
 
 
 
-
-
-
-
-
-	// window.Asteroid = Asteroid;
 	module.exports = Asteroid;
 
 
@@ -252,11 +244,9 @@
 
 	let MovingObject = __webpack_require__(2);
 	let Util = __webpack_require__(3);
-	// let Game = require('./game.js');
 
 	let Bullet = function (pos, vel, game) {
 	  MovingObject.call(this, {pos: pos, vel: vel, radius: Bullet.RADIUS, color: Bullet.COLOR, game: game});
-	  // this.normalizeVel();
 	};
 	Util.inherits(Bullet, MovingObject);
 
@@ -277,11 +267,6 @@
 	  return false;
 	};
 
-	// Bullet.prototype.normalizeVel = function () {
-	//   this.vel = [this.vel[0] * 2, this.vel[1] * 2];
-	// };
-
-
 
 	module.exports = Bullet;
 
@@ -292,7 +277,7 @@
 
 	let Asteroid = __webpack_require__(1);
 	let Ship = __webpack_require__(4);
-	let Bullet = __webpack_require__(5)
+	let Bullet = __webpack_require__(5);
 
 	let Game = function() {
 	  this.asteroids = [];
@@ -308,7 +293,6 @@
 	Game.prototype.addAsteroids = function() {
 	  for (var i = 0; i < Game.NUM_ASTEROIDS; i++) {
 	    let pos = this.randomPosition();
-	    // debugger
 	    let newAst = new Asteroid(pos, this);
 	    this.asteroids.push(newAst);
 	  }
@@ -316,7 +300,6 @@
 	};
 
 	Game.prototype.blowUpAsteroid = function (oldAst) {
-	  // debugger
 	  for (var i = 0; i < 3; i++) {
 	    let pos = [oldAst.pos[0], oldAst.pos[1]];
 	    let newAst = new Asteroid(pos, this);
@@ -355,17 +338,10 @@
 
 	Game.prototype.checkCollisions = function () {
 	  let theseObjs = this.allObjects();
-	  // console.log(theseObjs);
 	    for (var i = 0; i < theseObjs.length - 1; i++) {
 	      for (var j = i + 1; j < theseObjs.length; j++) {
 	        if (theseObjs[i].isCollidedWith(theseObjs[j])) {
-	          // this.asteroids.splice(j, 1);
-	          // this.asteroids.splice(i, 1);
-	          // this.remove(this.asteroids[j]);
-	          // this.remove(this.asteroids[i]);
 	          theseObjs[i].collideWith(theseObjs[j]);
-	          // j = i;
-	          // alert("Collison");
 	        }
 	      }
 	    }
@@ -388,8 +364,6 @@
 	};
 
 	Game.prototype.allObjects = function () {
-	  // debugger
-
 	  return this.asteroids.concat(this.bullets).concat(this.ship);
 	};
 
@@ -428,8 +402,6 @@
 	  key('s', function(){ this.game.ship.power([0,1]); }.bind(this));
 	  key('x', function(){ this.game.ship.fireBullet(); }.bind(this));
 	  key('space', function(){ this.game.ship.fireBullet(); }.bind(this));
-
-	  // key('space', () => { this.game.ship.fireBullet(); });
 
 	};
 
